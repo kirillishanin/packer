@@ -1,0 +1,11 @@
+#cloud-config
+autoinstall:
+    version: 1
+    identity:
+        hostname: ubuntu-server
+        username: packer
+        password: "$6$S0bLLqB46rzK.zbM$JHzMAU6mhFSaerNz9OFkEE2wzXuVcqu442/nKaazYlOK6pJpgmykreU3oc1RdcHG3Dj/O9hPDF7gma2YPFpeU."
+    locale: en_US
+    ssh: 
+        install-server: yes
+        allow-pw: yes
