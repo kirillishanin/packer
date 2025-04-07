@@ -1,0 +1,20 @@
+#cloud-config
+autoinstall:
+    version: 1
+    identity:
+        hostname: ubuntu-server
+        username: vagrant
+        password: "$6$VxVTzaoTEijJfWKR$U0U6KtxcRP4OD6BVc8hHe8nua7iY1hqXMQ2Z2qgNRhKK1pEAmy4fpCoOBotK0LKOM5UHLXVVJf56VmEn312Es/"
+    locale: en_US
+    ssh: 
+        install-server: yes
+        allow-pw: yes
+    user-data:
+        disable_root: false
+    late-commands:
+        - sed -i -e 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /target/etc/ssh/sshd_config
+        - sed -i -e 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /target/etc/ssh/sshd_config
+        - echo 'vagrant ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/vagrant
+        - curtin in-target --target=/target -- chmod 440 /etc/sudoers.d/vagrant
+        - curtin in-target --target=/target -- apt-get update
+        - curtin in-target --target=/target -- apt-get upgrade --yes

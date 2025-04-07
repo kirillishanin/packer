@@ -1,10 +1,10 @@
 variable "username" {
     type        = string
-    default     = "packer"
+    default     = "vagrant"
     sensitive   = true
 }
 variable "password" {
     type        = string
-    default     = "packer"
+    default     = "vagrant"
     sensitive   = true
 }
